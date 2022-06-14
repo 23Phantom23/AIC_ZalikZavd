@@ -1,0 +1,80 @@
+﻿<Window x:Class="ClothingStore.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ClothingStore"
+        mc:Ignorable="d"
+        Title="Clothing Store" Height="1080" Width="1920" WindowState="Maximized">
+    <Grid>
+
+        <TabControl>
+            <TabItem Header="Clothes">
+                <Grid Background="#FFE5E5E5" RenderTransformOrigin="0.5,0.538">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="740"/>
+                        <RowDefinition Height="45*"/>
+                        <RowDefinition Height="28*"/>
+                    </Grid.RowDefinitions>
+                    <ListView x:Name="ClothesItemList" SelectionChanged="ClothesItemList_SelectedChanget">
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn Header="Clothes Number" Width="150" DisplayMemberBinding="{Binding Clothes_number}"/>
+                                <GridViewColumn Header="Clothes Name" Width="150" DisplayMemberBinding="{Binding Clothes_Name}"/>
+                                <GridViewColumn Header="Price" Width="150" DisplayMemberBinding="{Binding Price}"/>
+                                <GridViewColumn Header="Type of Clothes" Width="150" DisplayMemberBinding="{Binding Id}"/>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+
+                    <Button Content="Create" Grid.Row="2" Width="200" HorizontalAlignment="Left" Margin="98,30,0,10" FontSize="20" Background="#FFAEF3A7" Click="CreateClothing"/>
+                    <Button Content="Update" Grid.Row="2" Width="200" HorizontalAlignment="Left" Margin="839,30,0,10" FontSize="20" Background="#FFF9F9A4" Click="UpdateClothing"/>
+                    <Button Content="Delete" Grid.Row="2" Width="200" HorizontalAlignment="Left" Margin="1664,30,0,10" FontSize="20" Background="#FFFD8080" Click="DeleteClothing"/>
+
+                    <Grid Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center" Width="720" Height="35">
+                        <Label Content="Name" HorizontalAlignment="Left" Margin="20,0,0,0" VerticalAlignment="Center" FontSize="14"/>
+                        <TextBox x:Name="NameTextBox" Text="{Binding SelectedItem.Clothes_Name, ElementName= ClothesItemList, Mode=OneWay}" HorizontalAlignment="Left"  Margin="70,0,0,0" Width="150" Height="35" VerticalAlignment="Center"/>
+
+                        <Label Content="Price" HorizontalAlignment="Left" Margin="280,0,0,0" VerticalAlignment="Center" FontSize="14"/>
+                        <TextBox x:Name="PriceTextBox" Text="{Binding SelectedItem.Price, ElementName= ClothesItemList, Mode=OneWay}" HorizontalAlignment="Left" Margin="330,0,0,0" Width="150" Height="35" VerticalAlignment="Center"/>
+
+                        <Label Content="Type" HorizontalAlignment="Left" Margin="520,0,0,0" VerticalAlignment="Center" FontSize="14"/>
+                        <ComboBox x:Name="TypeComboBox" Text="{Binding SelectedItem.Id, ElementName=ClothesItemList, Mode=OneWay}"  IsSynchronizedWithCurrentItem="True" Width="150" Height="35" VerticalAlignment="Center" Margin="570,0,0,0" DisplayMemberPath="Type_Id" SelectedValuePath="Type.Type_Id" HorizontalAlignment="Left"  />
+
+                    </Grid>
+                    <Button Content="Search" HorizontalAlignment="Left" Margin="1169,121,0,0" Grid.Row="1" VerticalAlignment="Top" Height="39" Width="148" Click="Search_Type" />
+                    <Button Content="Search" HorizontalAlignment="Left" Margin="669,121,0,0" Grid.Row="1" VerticalAlignment="Top" Height="39" Width="148" Click="Search_Name"/>
+                    <Button Content="Max" HorizontalAlignment="Left" Margin="927,121,0,0" Grid.Row="1" VerticalAlignment="Top" Height="39" Width="148" Click="Max" />
+                </Grid>
+            </TabItem>
+            <TabItem Header="Types">
+                <Grid Background="#FFE5E5E5">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="751"/>
+                        <RowDefinition Height="164*"/>
+                        <RowDefinition Height="121*"/>
+                    </Grid.RowDefinitions>
+                    <ListView x:Name="TypesItemList">
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn Header="Type Id" Width="150" DisplayMemberBinding="{Binding Type_Id}"/>
+                                <GridViewColumn Header="Type Name" Width="150" DisplayMemberBinding="{Binding Type_Name}"/>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+
+                    <Button Content="Create" Grid.Row="2" Width="200" HorizontalAlignment="Left" Margin="106,30,0,10" FontSize="20" Background="#FFAEF3A7" Click="CreateType"/>
+                    <Button Content="Update" Grid.Row="2" Width="200" HorizontalAlignment="Center" Margin="0,30,0,10" FontSize="20" Background="#FFF9F9A4" Click="UpdateType"/>
+                    <Button Content="Delete" Grid.Row="2" Width="200" HorizontalAlignment="Left" Margin="1600,30,0,10" FontSize="20" Background="#FFFD8080" Click="DeleteType"/>
+
+                    <Grid Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center" Width="480" Height="35">
+
+                        <Label Content="Type Name" HorizontalAlignment="center" Margin="0,0,120,0" VerticalAlignment="Center" FontSize="14"/>
+                        <TextBox x:Name="TypeTextBox" Text="{Binding SelectedItem.Type_Name, ElementName= TypesItemList, Mode=OneWay}" HorizontalAlignment="center" Margin="120,0,0,0" Width="150" Height="35" VerticalAlignment="Center"/>
+
+                    </Grid>
+                </Grid>
+            </TabItem>
+        </TabControl>
+    </Grid>
+</Window>
