@@ -37,8 +37,8 @@ namespace ClothingStore
         {
             List<Type> DatabaseTypes = context.Types.Include(type => type.Clothes).ToList();
             TypesItemList.ItemsSource = DatabaseTypes;
-            List<Clothing> DatabaseBoats = context.Clothes.Include(clothing => clothing.Type).ToList();
-            ClothesItemList.ItemsSource = DatabaseBoats;
+            List<Clothing> DatabaseClothes = context.Clothes.Include(clothing => clothing.Type).ToList();
+            ClothesItemList.ItemsSource = DatabaseClothes;
 
             TypeComboBox.ItemsSource = DatabaseTypes;
 
@@ -76,14 +76,14 @@ namespace ClothingStore
 
         private void UpdateClothing(object sender, RoutedEventArgs e)
         {
-            Clothing selectedBoat = ClothesItemList.SelectedItem as Clothing;
+            Clothing selectedClothes = ClothesItemList.SelectedItem as Clothing;
             var name = NameTextBox.Text;
             var price = PriceTextBox.Text;
             var type = TypeComboBox.Text;
 
             if (IsEmpty(name) == false && IsEmpty(price) == false && type != null)
             {
-                Clothing clothing = context.Clothes.Find(selectedBoat.Clothes_number);
+                Clothing clothing = context.Clothes.Find(selectedClothes.Clothes_number);
                 clothing.Clothes_Name = name;
                 clothing.Price = Convert.ToInt32(price);
                 clothing.Id = Convert.ToInt32(type);
